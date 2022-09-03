@@ -61,7 +61,7 @@ const carditems = cards => {
     
     else {
 
-        itemnumber.innerHTML = "No News found";
+        itemnumber.innerHTML = "No Items found";
         loaderspinner(false);
     }
         
@@ -84,9 +84,10 @@ const carditems = cards => {
                         <div class="card-text d-flex justify-content-between align-items-center flex-wrap">
                             <div class="d-flex align-items-center">
                                 <img src="${card.author.img}" class="img-thumbnail" style="width: 40px; height: 40px;"/>
-                                <span>Author Name : ${author.name}</span>
+                                <span> Name : ${author.name}</span>
                             </div>
-                            <span>Total views : ${total_view}</span>
+                           
+                            <span> 👁️   ${total_view}</span>
                             <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="singlePostDetails('${card._id}')">
                                 SEE DETAILS
                             </button>
