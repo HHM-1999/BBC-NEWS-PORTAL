@@ -48,8 +48,8 @@ const catagoriesitems = item => {
      
 }
 const carditems = cards => {
-    cards.sort((b1, a2) => {
-        return a2.total_view - b1.total_view;
+    cards.sort((a1, a2) => {
+        return a2.total_view - a1.total_view;
     });
     //console.log(cards.length);
     const itemnumber = document.getElementById('item-number');
@@ -80,7 +80,7 @@ const carditems = cards => {
                 <div class="col-md-9">
                     <div class="card-body">
                         <h5 class="card-title">${title}</h5>
-                        <p class="card-text">${details.length > 200 ? details.slice(0, 200) + "..." : details}</p>
+                        <p class="card-text">${details.length > 300 ? details.slice(0, 300) + "..." : details}</p>
                         <div class="card-text d-flex justify-content-between align-items-center flex-wrap">
                             <div class="d-flex align-items-center">
                                 <img src="${card.author.img}" class="img-thumbnail" style="width: 40px; height: 40px;"/>
