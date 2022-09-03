@@ -56,7 +56,7 @@ const carditems = cards => {
                                 <span>Author Name : ${author.name}</span>
                             </div>
                             <span>Total views : ${total_view}</span>
-                            <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="showmodal('${card._id}','${card.author}','${card.details}','${card.thumbnail_url}'">
+                            <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="singlePostDetails('${card._id}')">
                                 SEE DETAILS
                             </button>
                         </div>
@@ -78,9 +78,5 @@ const loaderspinner = (loading) => {
         document.getElementById('load').classList.add('d-none');
     }
 
-}
-//modal ///
-const showmodal = (author,details,image_url,thumbnail_url) => {
-    console.log(author, details, image_url, thumbnail_url);
 }
 
