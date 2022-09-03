@@ -1,3 +1,4 @@
+//catagories start///
 const loadcatagories = () => {
     try {
           fetch('https://openapi.programming-hero.com/api/news/categories')
@@ -47,8 +48,8 @@ const catagoriesitems = item => {
      
 }
 const carditems = cards => {
-    cards.sort((a1, a2) => {
-        return a2.total_view - a1.total_view;
+    cards.sort((b1, a2) => {
+        return a2.total_view - b1.total_view;
     });
     //console.log(cards.length);
     const itemnumber = document.getElementById('item-number');
