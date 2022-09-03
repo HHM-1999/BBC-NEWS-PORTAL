@@ -1,7 +1,15 @@
 const loadcatagories = () => {
-    fetch('https://openapi.programming-hero.com/api/news/categories')
+    try {
+          fetch('https://openapi.programming-hero.com/api/news/categories')
         .then(res => res.json())
         .then(data=>displaycatagories(data.data.news_category))
+      
+    }
+    catch (error) {
+        console.log(error);
+        
+    }
+  
         
 }
 loadcatagories();
@@ -26,14 +34,36 @@ const displaycatagories = catagories => {
 const catagoriesitems = item => {
     //  start loader
     loaderspinner(true);
-    fetch(`https://openapi.programming-hero.com/api/news/category/${item}`)
+    try {
+         fetch(`https://openapi.programming-hero.com/api/news/category/${item}`)
         .then(res => res.json())
         .then(data => carditems(data.data))
     
+    }
+    catch (error) {
+        console.log(error);
+    }
+   
      
 }
 const carditems = cards => {
-    //console.log(cards)
+    cards.sort((a1, a2) => {
+        return a2.total_view - a1.total_view;
+    });
+    //console.log(cards.length);
+    const itemnumber = document.getElementById('item-number');
+
+    if (cards.length > 0) {
+       
+        itemnumber.innerHTML = cards.length + " "+"Items found";
+    }
+    
+    else {
+
+        itemnumber.innerHTML = "No News found";
+        loaderspinner(false);
+    }
+        
     const cardcontainer = document.getElementById('card-container');
     cardcontainer.innerHTML = "";
     cards.forEach(card => {
@@ -56,7 +86,7 @@ const carditems = cards => {
                                 <span>Author Name : ${author.name}</span>
                             </div>
                             <span>Total views : ${total_view}</span>
-                            <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="showmodal('${card._id}','${card.author}','${card.details}','${card.thumbnail_url}'">
+                            <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="singlePostDetails('${card._id}')">
                                 SEE DETAILS
                             </button>
                         </div>
@@ -64,6 +94,7 @@ const carditems = cards => {
                 </div>
             </div>`;
         cardcontainer.appendChild(div);
+        loaderspinner(false);
 
 
     })
@@ -79,8 +110,27 @@ const loaderspinner = (loading) => {
     }
 
 }
-//modal ///
-const showmodal = (author,details,image_url,thumbnail_url) => {
-    console.log(author, details, image_url, thumbnail_url);
+
+///modal
+const singlePostDetails = (single) => {
+    const url = `https://openapi.programming-hero.com/api/news/${single}`;
+    fetch(url)
+        .then(res => res.json())
+        .then(data=>displaymodal(data.data[0]))
 }
+const displaymodal = (data) => {
+    //console.log(data)
+    const modal = document.getElementById('display-modal');
+    modal.innerHTML = `
+     <img src="${data.image_url}" class="img-fluid">
+     <h6> Name : ${data.author.name}</h6>
+     <p>Published Date : ${data.author.published_date}</p>
+     <p> Details : ${data.details}</p>
+
+    `
+    
+}
+
+
+
 
